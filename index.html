@@ -1,0 +1,1639 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Art restitution: law firms and expert witnesses</title><style>:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 16px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans:
+    -apple-system-body, ui-sans-serif, -apple-system, system-ui, "Segoe UI",
+    Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --icon-size: 16px;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --corner-shape: round;
+  --radius: var(--border-radius-lg, 8px);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 17'%3E%3Cpath d='M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z'/%3E%3C/svg%3E");
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html > body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: var(--visualize-paint-gutter, 0px);
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  -webkit-font-smoothing: antialiased;
+  font-size: var(--font-size-base);
+  line-height: calc(var(--font-size-base) * 1.625);
+  font-weight: var(--font-weight-normal);
+}
+
+:root:not([data-app-block-surface], [data-visualize-standalone]) > body {
+  padding: 12px;
+}
+
+.cursor-interaction {
+  cursor: var(--cursor-interaction, pointer);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: var(--cursor-interaction, pointer);
+  text-decoration: none;
+  text-underline-offset: 2px;
+  font-weight: inherit;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+.table {
+  font-family: var(--font-sans);
+}
+
+h1 {
+  font-size: calc(var(--font-size-base) * 1.5);
+  line-height: 1.3333333333;
+}
+
+h2 {
+  font-size: calc(var(--font-size-base) * 1.25);
+  line-height: 1.4;
+}
+h3 {
+  font-size: calc(var(--font-size-base) * 1.125);
+  line-height: 1.5555555556;
+}
+h4 {
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+}
+h5,
+h6 {
+  font-size: var(--font-size-base);
+  line-height: calc(var(--font-size-base) * 1.625);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+b,
+strong,
+th {
+  font-weight: 600;
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+pre,
+pre code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: calc(var(--font-size-base) * 0.875);
+  line-height: calc(var(--font-size-base) * 1.625);
+  font-family: var(--font-sans);
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 5%, transparent);
+}
+.table :is(th, td):not(:last-child) {
+  padding-inline-end: calc(var(--font-size-base) * 1.5);
+}
+
+.table-responsive > .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead :is(th, td) {
+  border-bottom-color: var(--border-strong, var(--input));
+  padding-block: calc(var(--font-size-base) / 2);
+  line-height: var(--font-size-base);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+.table tbody :is(th, td) {
+  padding-block: calc(var(--font-size-base) * 0.625);
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 8px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align="right"]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align="center"]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: var(--corner-shape);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+.widget {
+  min-width: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  box-shadow: 0 0 0 0.5px var(--border-strong, var(--border));
+  color: var(--foreground);
+  background: var(--background);
+}
+
+#widget > :not(.card, .widget, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  border: 1px solid var(--border);
+  corner-shape: var(--corner-shape);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--font-sans);
+  padding: 5px 12px;
+  border-color: color-mix(
+    in oklab,
+    light-dark(var(--primary-foreground), var(--foreground)) 5%,
+    transparent
+  );
+  border-radius: var(--radius-2xl);
+  color: light-dark(var(--primary-foreground), var(--foreground));
+  background: light-dark(var(--foreground), var(--popover));
+  box-shadow: 0 8px 18px rgb(15 23 42 / 20%);
+  letter-spacing: -0.15px;
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+}
+
+/* The shared runtime owns data-tooltip; suppress AppBlock's pseudo-tooltip. */
+main [data-tooltip]::after {
+  content: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin-block: 6px;
+  border: 0;
+  background: var(--border);
+}
+
+.nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  margin-block: calc((var(--line-height-normal, 1.5em) - 8px) / 2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar:only-child {
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  color: color-mix(in srgb, var(--foreground) 40%, var(--muted-foreground));
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  font-family: var(--font-sans);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 1;
+}
+
+small,
+.text-small {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls > .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls > .form-label > :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.nav-link,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+/* Match inline alignment without overriding a containing flex or grid layout. */
+.btn,
+.nav-link,
+.form-control,
+.form-select,
+.form-range,
+.form-check {
+  vertical-align: middle;
+}
+
+.btn,
+.nav-link {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  corner-shape: var(--corner-shape);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: inherit;
+  font-family: var(--font-sans);
+  height: fit-content;
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  padding-inline: var(--control-spacing, 12px);
+  border-color: transparent;
+  border-radius: var(--radius-full);
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+}
+
+.btn {
+  border-color: var(--border);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: var(--cursor-interaction, pointer);
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: light-dark(
+    color-mix(in srgb, var(--foreground) 5.5%, transparent),
+    color-mix(in srgb, var(--foreground) 8%, transparent)
+  );
+}
+
+.nav-link:not(:disabled):not([aria-disabled="true"]):hover {
+  background: color-mix(in srgb, var(--foreground) 10%, transparent);
+}
+
+.btn-primary {
+  border-color: var(--border);
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: border-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: border-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--muted-foreground);
+  background: light-dark(
+    color-mix(in srgb, var(--foreground) 5.5%, transparent),
+    color-mix(in srgb, var(--foreground) 8%, transparent)
+  );
+}
+
+.nav-pills .nav-link {
+  min-width: 0;
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.nav-justified .nav-link {
+  flex: 1 1 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+/* Shared preview chrome; product styles stay inside each variant. */
+.viz-dotted-background {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--foreground) 14%, transparent) 0.8px,
+    transparent 0.8px
+  );
+  background-position: center;
+  background-size: 16px 16px;
+}
+
+.viz-carousel {
+  position: relative;
+  min-width: 0;
+}
+
+.viz-carousel:has(> .viz-carousel-controls) {
+  min-height: calc(60px + var(--viz-carousel-picker-height, 0px));
+  padding-bottom: 60px;
+}
+
+.viz-carousel > [data-variant][hidden] {
+  display: none !important;
+}
+
+.viz-carousel > [data-variant] {
+  isolation: isolate;
+}
+
+.viz-carousel-controls {
+  --viz-carousel-hover: light-dark(
+    color-mix(in srgb, var(--foreground) 5.4%, transparent),
+    color-mix(in srgb, var(--foreground) 7.8%, transparent)
+  );
+  position: absolute;
+  z-index: 2;
+  bottom: 8px;
+  left: 50%;
+  display: flex;
+  width: max-content;
+  /* Leave room for the host's design-controls launcher at the trailing edge. */
+  max-width: calc(100% - 96px);
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+  /* Match the settings dropdown chrome independently of the content font size. */
+  font-size: 13px;
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+  transform: translateX(-50%);
+  user-select: none;
+}
+
+/* Keep authored mockup button styles out of the shared carousel chrome. */
+.viz-carousel-controls button,
+.viz-carousel-picker > summary {
+  display: flex !important;
+  height: auto !important;
+  min-height: 30px;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px;
+  padding: 0 6px !important;
+  -webkit-app-region: no-drag;
+  border: 0 !important;
+  border-radius: 14px !important;
+  color: inherit !important;
+  background: transparent !important;
+  font: inherit !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.viz-carousel-controls > button,
+.viz-carousel-picker > summary {
+  position: relative;
+  isolation: isolate;
+}
+
+.viz-carousel-controls > button {
+  --icon-size: 16px;
+  width: 30px !important;
+  padding: 0 !important;
+}
+
+.viz-carousel-picker > summary {
+  padding-inline: 12px !important;
+}
+
+.viz-carousel-controls .viz-carousel-caret {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  margin: 0;
+  color: inherit;
+  transform: rotate(180deg);
+}
+
+.viz-carousel-controls > button > svg,
+.viz-carousel-controls .viz-carousel-caret,
+.viz-carousel-count {
+  opacity: 0.5;
+}
+
+.viz-carousel-controls > button::before,
+.viz-carousel-picker > summary::before {
+  position: absolute;
+  z-index: -1;
+  inset: 3px;
+  border-radius: 12px;
+  content: "";
+  pointer-events: none;
+}
+
+.viz-carousel-controls > button:hover::before,
+.viz-carousel-picker > summary:hover::before {
+  background: var(--viz-carousel-hover);
+}
+
+.viz-carousel-controls > button,
+.viz-carousel-controls [data-lucide],
+.viz-carousel-controls .lucide {
+  flex-shrink: 0;
+}
+
+.viz-carousel-picker {
+  min-width: 0;
+}
+
+.viz-carousel-picker > summary {
+  min-width: 0;
+  list-style: none;
+}
+
+.viz-carousel-picker > summary::-webkit-details-marker {
+  display: none;
+}
+
+.viz-carousel-count {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.viz-carousel-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.viz-carousel-options {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 4px);
+  left: 0;
+  display: flex;
+  max-height: 240px;
+  flex-direction: column;
+  gap: 2px;
+  overflow: auto;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--background);
+  box-shadow: 0 4px 12px light-dark(rgb(0 0 0 / 6%), rgb(0 0 0 / 25%));
+}
+
+.viz-carousel-options > button {
+  border-radius: max(0px, calc(var(--radius-lg) - 5px)) !important;
+  width: 100% !important;
+  min-height: 28px;
+  justify-content: flex-start !important;
+  padding: 4px 8px !important;
+  font-size: var(--font-size-small) !important;
+  text-align: start;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.viz-carousel-options > [aria-current="true"],
+.viz-carousel-options > button:hover {
+  background: var(--viz-carousel-hover) !important;
+}
+
+.btn:disabled,
+.nav-link:disabled,
+.nav-link[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  padding-inline: calc(4px + var(--control-spacing, 12px) / 2);
+  border-color: var(--input);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--popover) 96%, transparent);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.4285714286;
+}
+.form-control:is(
+  [type="file"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="week"],
+  [type="color"]
+) {
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  line-height: 18px;
+}
+.form-control:is(
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="week"]
+) {
+  padding-inline: var(--control-spacing, 12px);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type="file"] {
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+  padding: 0;
+}
+
+.form-control[type="file"]::file-selector-button {
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+  min-height: calc(10px + 2 * var(--control-spacing, 12px));
+  padding-inline: var(--control-spacing, 12px);
+  margin-inline-end: var(--control-spacing, 12px);
+}
+
+.form-control[type="file"]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type="color"] {
+  width: 40px;
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: var(--corner-shape);
+}
+
+textarea.form-control {
+  height: auto;
+  resize: vertical;
+  min-height: 96px;
+  padding: 8px 10px;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: none;
+}
+.form-control:disabled {
+  color: var(--muted-foreground);
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  opacity: 1;
+}
+.form-control[aria-invalid="true"] {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--red) 20%, transparent);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: fit-content;
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  margin: 0;
+  /* The secondary icon role is 14px at compact density and 16px at web density. */
+  --icon-size: calc(10px + var(--control-spacing, 12px) / 2);
+  /* Settings dropdowns retain a 12px inset and a 4px text-to-chevron gap. */
+  padding: 0 calc(16px + var(--icon-size)) 0 12px;
+  outline: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent calc(50% - 0.6px),
+      var(--muted-foreground) calc(50% - 0.6px) calc(50% + 0.6px),
+      transparent calc(50% + 0.6px)
+    ),
+    linear-gradient(
+      135deg,
+      transparent calc(50% - 0.6px),
+      var(--muted-foreground) calc(50% - 0.6px) calc(50% + 0.6px),
+      transparent calc(50% + 0.6px)
+    );
+  background-position:
+    calc(100% - 12px - var(--icon-size) / 2) 50%,
+    calc(100% - 12px - var(--icon-size) * 0.18) 50%;
+  background-repeat: no-repeat;
+  background-size: calc(var(--icon-size) * 0.32) calc(var(--icon-size) * 0.32);
+  cursor: var(--cursor-interaction, default);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+}
+
+.form-select option {
+  color: var(--popover-foreground);
+  background-color: var(--popover);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: light-dark(
+    color-mix(in srgb, var(--foreground) 5.5%, transparent),
+    color-mix(in srgb, var(--foreground) 8%, transparent)
+  );
+}
+
+.form-select:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+.form-select:disabled {
+  opacity: 0.4;
+}
+
+.form-check {
+  display: flex;
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+  corner-shape: round;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  width: calc(10px + var(--control-spacing, 12px) / 2);
+  height: calc(10px + var(--control-spacing, 12px) / 2);
+  border-color: var(--border-strong, var(--input));
+  border-radius: calc(var(--radius-sm) / 2);
+  background-color: transparent;
+  color: var(--foreground);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:is(:checked, :indeterminate) {
+  border-color: var(--border-strong, var(--input));
+  background-color: color-mix(in srgb, var(--popover) 96%, transparent);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: "";
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+  background-color: var(--foreground);
+}
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:indeterminate::before {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 65%;
+  height: 6.65%;
+  margin: auto;
+  border-radius: var(--radius-full);
+  background: var(--foreground);
+  mask: none;
+  content: "";
+}
+
+.form-check-input[type="radio"] {
+  border-radius: var(--radius-full);
+  width: 16px;
+  height: 16px;
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--input);
+}
+
+.form-check-input[type="radio"]:checked {
+  border: 0;
+  background: radial-gradient(
+    circle,
+    var(--primary-foreground) 0 3px,
+    var(--foreground) 3px
+  );
+  box-shadow: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.form-check:not(.form-switch) .form-check-input[type="checkbox"]:focus-visible {
+  border-color: var(--ring);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+.form-check:not(.form-switch) .form-check-input[type="radio"]:disabled,
+.form-check:not(.form-switch)
+  .form-check-input[type="radio"]:disabled
+  + .form-check-label {
+  opacity: 0.5;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  content: "";
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+  border-color: #fff;
+  background: #fff;
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--blue);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+  outline: none;
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  accent-color: var(--primary);
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  outline: none;
+  border-radius: var(--radius-full);
+  color: var(--foreground);
+  background: transparent;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  background: var(--form-range-track, var(--border));
+  height: 2px;
+  border-radius: var(--radius-full);
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  margin-top: -9px;
+  border-color: transparent;
+  background: currentColor;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Outline the native track and thumb, preserving the larger input hit area. */
+.form-range:focus-visible::-webkit-slider-runnable-track {
+  outline: 2px auto Highlight;
+  outline-color: -webkit-focus-ring-color;
+}
+
+.form-range::-moz-range-track {
+  background: var(--form-range-track, var(--border));
+  height: 2px;
+  border-radius: var(--radius-full);
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  border-color: transparent;
+  background: currentColor;
+  box-shadow: var(--shadow-sm);
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  outline: 2px solid Highlight;
+  outline-offset: 2px;
+}
+
+.form-range:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed="true"],
+  [aria-selected="true"],
+  .is-selected
+) {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--blue);
+}
+
+.btn.viz-tile:is([aria-pressed="true"], [aria-selected="true"], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.viz-carousel-controls :is(button, summary):focus-visible {
+  outline: 2px solid var(--ring) !important;
+  outline-offset: 2px !important;
+}
+
+/* Web recipes are the default, including on renderers without inline style queries. */
+@supports (border-radius: if(style(--corner-shape: round): 1px; else: 2px)) {
+  /* Match the host's proportional text-sm scale at every text preference. */
+  .tooltip,
+  .viz-badge,
+  .btn,
+  .nav-link,
+  .form-control,
+  .form-select {
+    font-size: if(
+      style(--corner-shape: round): round(
+          nearest,
+          calc(var(--font-size-base) * 14 / 16),
+          1px
+        );
+        else: round(nearest, calc(var(--font-size-base) * 13 / 14), 1px)
+    );
+  }
+
+  .btn,
+  .nav-link,
+  .form-select {
+    border-radius: if(
+      style(--corner-shape: round): var(--radius-full); else: var(--radius-lg)
+    );
+  }
+
+  .form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+    border-radius: if(
+      style(--corner-shape: round): calc(var(--radius-sm) / 2);
+        else: calc(var(--radius-lg) * 0.4)
+    );
+  }
+
+  .tooltip {
+    font-weight: if(
+      style(--corner-shape: round): 600; else: var(--font-weight-normal)
+    );
+  }
+}
+
+@media (pointer: coarse) {
+  .viz-carousel:has(> .viz-carousel-controls) {
+    min-height: calc(76px + var(--viz-carousel-picker-height, 0px));
+    padding-bottom: 76px;
+  }
+
+  .btn,
+  .nav-link,
+  .viz-carousel-controls button,
+  .viz-carousel-picker > summary,
+  .form-control,
+  .form-select {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Keep small-screen WebKit from zooming when a text field receives focus. */
+  .form-control,
+  .form-select {
+    font-size: max(16px, calc(var(--font-size-base) * 14 / 16));
+    font-size: max(
+      16px,
+      round(nearest, calc(var(--font-size-base) * 14 / 16), 1px)
+    );
+  }
+  .form-control:is(
+    [type="file"],
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="week"],
+    [type="time"],
+    [type="color"]
+  ) {
+    height: 44px;
+    min-height: 44px;
+    font-size: max(16px, calc(var(--font-size-base) * 14 / 16));
+    font-size: max(
+      16px,
+      round(nearest, calc(var(--font-size-base) * 14 / 16), 1px)
+    );
+  }
+
+  .form-control[type="file"]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type="color"] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="time"],
+    [type="week"]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: "";
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget > svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html>body{padding:0}
+
+    #art-case-network{color:var(--foreground);font-family:inherit}
+    #art-case-network .eyebrow{color:var(--muted-foreground);letter-spacing:.08em;text-transform:uppercase}
+    #art-case-network .columns{display:grid;grid-template-columns:.85fr 1fr 1fr 1fr;gap:26px;margin-top:24px}
+    #art-case-network .colhead{padding-bottom:12px;border-bottom:1px solid var(--border);font-weight:500}
+    #art-case-network .map{position:relative;display:grid;grid-template-columns:.85fr 1fr 1fr 1fr;gap:26px;padding:18px 0}
+    #art-case-network .lane{position:relative;display:flex;flex-direction:column;justify-content:space-around;gap:20px;min-height:610px;z-index:1;pointer-events:none}
+    #art-case-network .node{position:relative;padding:18px 12px;border:2px solid var(--foreground);border-radius:50%;text-align:center;pointer-events:auto;transition:opacity .15s;background:var(--background)}
+    #art-case-network .holder{}
+    #art-case-network .law{border:4px solid var(--firm-color);background:color-mix(in srgb,var(--firm-color) 18%,var(--background))}
+    #art-case-network .expert{}
+    #art-case-network .name{font-weight:500;margin-bottom:4px}
+    #art-case-network .meta{color:var(--muted-foreground)}
+    #art-case-network .map svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+    #art-case-network path{fill:none;stroke-width:4;stroke-linecap:round;opacity:.9;transition:opacity .15s}
+    #art-case-network path.active{stroke-width:5;opacity:1}
+    #art-case-network .dim{opacity:.12}
+    #art-case-network .detail{padding:16px 0;border-top:1px solid var(--border)}
+    #art-case-network .sources{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:10px}
+    #art-case-network .legend{display:flex;flex-wrap:wrap;gap:10px 20px;color:var(--muted-foreground);margin:12px 0}
+    #art-case-network .dot{display:inline-block;width:9px;height:9px;margin-right:6px;border-radius:50%}
+    @media(max-width:540px){#art-case-network .columns,#art-case-network .map{gap:12px}#art-case-network .node{padding:14px 5px;overflow-wrap:anywhere}#art-case-network .lane{min-height:760px;gap:12px}#art-case-network .law .meta{display:none}}
+  
+body{margin:0;padding:20px;font-family:system-ui,sans-serif;background:var(--background);color:var(--foreground)}#art-case-network{max-width:1000px;margin:auto}</style></head><body><div id="restitution-network-expanded">
+<style>
+#restitution-network-expanded{color:var(--foreground);font-family:inherit}
+#restitution-network-expanded .legend{display:flex;flex-wrap:wrap;gap:10px 22px;margin:14px 0;color:var(--muted-foreground)}
+#restitution-network-expanded .swatch{display:inline-block;width:18px;height:4px;vertical-align:middle;margin-right:7px;background:var(--foreground)}
+#restitution-network-expanded .dash{background:repeating-linear-gradient(to right,var(--foreground) 0 5px,transparent 5px 8px)}
+#restitution-network-expanded .headers,#restitution-network-expanded .network{display:grid;grid-template-columns:.85fr 1fr 1fr 1fr;gap:26px}
+#restitution-network-expanded .headers{margin-top:22px;font-weight:500}
+#restitution-network-expanded .headers>div{padding-bottom:12px;border-bottom:1px solid var(--border)}
+#restitution-network-expanded .network{position:relative;padding:20px 0}
+#restitution-network-expanded .lane{display:flex;flex-direction:column;justify-content:space-around;gap:22px;position:relative;z-index:1;pointer-events:none}
+#restitution-network-expanded .entity{display:block;width:100%;box-sizing:border-box;border:2px solid var(--foreground);border-radius:50%;padding:20px 12px;text-align:center;background:var(--background);color:var(--foreground);font:inherit;pointer-events:auto;overflow-wrap:break-word}
+#restitution-network-expanded .entity.law{border:4px solid var(--firm);background:color-mix(in srgb,var(--firm) 18%,var(--background))}
+#restitution-network-expanded .name{font-weight:500;display:block}
+#restitution-network-expanded .meta{color:var(--muted-foreground);display:block;margin-top:5px}
+#restitution-network-expanded .network svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+#restitution-network-expanded .network path{fill:none;stroke-width:4;stroke-linecap:round;opacity:.9}
+#restitution-network-expanded .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+#restitution-network-expanded .evidence{margin-top:16px;border-top:1px solid var(--border)}
+#restitution-network-expanded details{padding:14px 0;border-bottom:1px solid var(--border)}
+#restitution-network-expanded summary{font-weight:500}
+#restitution-network-expanded .source{display:block;margin-top:8px;overflow-wrap:anywhere}
+#restitution-network-expanded .case-note{margin:12px 0}
+#restitution-network-expanded .scope{margin-top:12px;color:var(--muted-foreground)}
+#restitution-network-expanded .status{margin-top:16px}
+#restitution-network-expanded .empty{text-align:center;color:var(--muted-foreground)}
+@media(max-width:540px){#restitution-network-expanded .headers,#restitution-network-expanded .network{gap:8px;grid-template-columns:.85fr 1fr 1fr 1fr}#restitution-network-expanded .entity{padding:12px 3px;overflow-wrap:anywhere;font-size:11px}#restitution-network-expanded .law .meta{display:none}#restitution-network-expanded .lane{gap:16px}}
+</style>
+<h2>Art restitution: law firms and their witnesses</h2>
+<div class="scope text-small">Museums, collectors and dealers opposing restitution claims · Research updated 20 October 2026</div>
+<div class="legend text-small"><span><i class="swatch"></i>Case-linked expert / factual witness</span><span><i class="swatch dash"></i>Research, consulting or prior legal review</span><span>Grey dotted line: institutional involvement · Purple dotted line: documented title insurer · Grey dotted line: AIC involvement in Searle case · Line and law-firm outline share a color</span><span>* Expert-witness role documented in court filings; confirmed cases marked below.</span></div>
+<div class="viz-controls" id="firm-pickers" aria-label="Select law firm"></div>
+<div class="status" aria-live="polite" id="selection-status"></div>
+<div class="headers"><div>Insurer of possessor</div><div>Museums / collectors / dealers</div><div>Their law firms</div><div>Researchers / expert witnesses</div></div>
+<div class="network" role="group" aria-label="Documented connections between restitution opponents, law firms, witnesses and advisers">
+<svg aria-hidden="true"></svg><div class="lane" id="insurer-lane"></div><div class="lane" id="owner-lane"></div><div class="lane" id="firm-lane"></div><div class="lane" id="witness-lane"></div>
+</div>
+<div class="scope text-small">Connections identify researchers or expert witnesses whose work supported the museum’s or collector’s position in the specified case. Select an entity to see its cases and sources.</div>
+<div class="evidence" id="case-evidence"></div>
+<script>
+(()=>{
+const root=document.getElementById('restitution-network-expanded');
+const DATA={"nodes": {"lehman": ["Robert Owen Lehman Foundation", "Lehman / Schiele · 2024"], "nagy": ["Richard Nagy", "Grünbaum / Schiele · 2017–21"], "aris": ["ARIS Title Insurance Corporation", "Title insurer · Woman Hiding Her Face"], "thyssen": ["Thyssen-Bornemisza Collection", "Cassirer / Pissarro · 2009–20"], "mfa": ["MFA Boston", "Seger-Thomschitz / Kokoschka · 2008–10"], "aic": ["Art Institute of Chicago", "Goodman / Searle · 1996–98; Grünbaum / Schiele · 2024"], "nixon": ["Nixon Peabody", "Thaddeus Stauber · colleagues vary by case"], "pryor": ["Pryor Cashman", "William L. Charron · 2021 appeal"], "sidley": ["Sidley Austin / Sidley & Austin", "Howard J. Trienens · Ralph Lerner · other counsel by case"], "covington": ["Covington & Burling", "Simon Frankel · Theodore Metzler"], "sherin": ["Sherin & Lodgen", "Robert Muldoon Jr. · Thomas Gorman"], "mcdermott": ["McDermott Will & Emery", "Edward Diskant · Jennifer Levengood"], "jennings": ["Guy Jennings", "Art-market valuation"], "nicholas": ["Lynn Nicholas", "Art-looting history"], "stein": ["Laurie A. Stein", "Provenance research"], "lillie": ["Sophie Lillie", "Viennese collection history"], "reinisch": ["August Reinisch", "Austrian / international law"], "reed": ["Victoria Reed", "MFA staff · provenance declaration"], "toledo": ["Toledo Museum of Art", "Gauguin · Street Scene in Tahiti"], "dia": ["Detroit Institute of Arts", "Van Gogh · The Diggers"], "alsdorf": ["Marilynn Alsdorf", "Collector · Picasso, Femme en blanc"], "searle": ["Daniel C. Searle", "Collector · Degas, Landscape with Smokestacks"], "met": ["Metropolitan Museum of Art", "Picasso · The Actor"], "moma": ["Museum of Modern Art", "Picasso · Boy Leading a Horse"], "guggenheim": ["Solomon R. Guggenheim Foundation", "Picasso · Le Moulin de la Galette"], "momagrosz": ["Museum of Modern Art", "Three George Grosz works"], "houston": ["MFA Houston", "Bellotto · The Marketplace at Pirna"], "fredjones": ["Fred Jones Jr. Museum / OU", "Pissarro · Shepherdess Bringing in Sheep"], "tunkl": ["David Tunkl Fine Art", "Dealer · Picasso, Femme en blanc"], "cleary": ["Cleary Gottlieb Steen & Hamilton", "Evan A. Davis"], "joseph": ["Gregory P. Joseph Law Office", "Gregory P. Joseph"], "proskauer": ["Proskauer Rose", "Solomon · Dale · Jones · Sims"], "wilmer": ["WilmerHale", "David W. Bowker · Michael D. Gottesman"], "fagel": ["FagelHaber", "Richard H. Chapman · David M. Rownd"], "sheppard": ["Sheppard Mullin", "Polly Towill · Karin Dougan Vogel"], "honigman": ["Honigman Miller Schwartz and Cohn", "Alan Schwartz · Joshua Opperer · Mark Stern"], "vassar": ["Vassar, Dills & Dawson & Bonfiglio", "Keith A. Wilkowski"], "munsch": ["Munsch Hardt Kopf & Harr", "Elizabeth Eoff · Richard A. Schwartz"], "debaecque": ["de Baecque Bellec", "Olivier de Baecque · French proceedings"], "bernard": ["Bernard & Bernard", "Stephen Bernard"], "ernst": ["Wolfgang Ernst", "German / Swiss private law"], "hermine": ["Hermine Chivian-Cobb", "Art consultant · deposed"], "katzenbach": ["Nicholas deB. Katzenbach", "Outside legal review · 2006"], "tolsada": ["Mariano Yzquierdo Tolsada", "Spanish civil law · declaration"], "buerba": ["Adriana de Buerba", "Spanish criminal law · declaration"], "carrero": ["Evelio Acevedo Carrero", "Museum official · factual witness"], "perez": ["Fernando J. Pérez de la Sota", "Transaction lawyer · factual witness"], "pedro": ["Pedro Alemán Abogados", "Madrid counsel · documented 2020"], "eckhart": ["Eckhart, McSwain, Silliman & Sears", "Thaddeus Stauber · AIC counsel · 1996–98"], "csepel": ["Republic of Hungary & Hungarian museums", "de Csepel / Herzog collection · 2010–2026"], "berg": ["Dutch museums (20 defendants)", "Berg / Katz collection · 2018–2022"]}, "cases": {"lehman": {"short": "Lehman", "laws": ["nixon"], "experts": ["jennings"], "title": "Robert Owen Lehman Foundation v. Israelitische Kultusgemeinde Wien et al.", "text": "Schiele, Portrait of the Artist’s Wife (D.1908). May 7, 2024 transcript: Nixon Peabody represents the foundation and Robin Lehman; Aaron Brian examines Guy Jennings. Separate entity from the Robert Lehman Foundation.", "sources": [["Trial transcript", "https://www.lootedart.com/web_images/pdf2024/240507%20Bench%20Trial%20Day%20One.pdf"]], "confirmedExperts": ["jennings"]}, "nagy": {"short": "Nagy", "insurer": "aris", "laws": ["nixon", "pryor"], "experts": ["nicholas", "stein", "lillie", "reinisch"], "title": "Reif v. Nagy · 161799/2015", "text": "Two Schiele works claimed by the Grünbaum heirs. Nixon Peabody: Thaddeus Stauber (2017); Pryor Cashman: William L. Charron (2021). ARIS Title Insurance Corporation insured Nagy’s title to Woman Hiding Her Face and had a right to approve his choice of counsel; the court did not establish which legal fees ARIS paid. Defense expert reports: Lillie 249; Nicholas 250; Stein 252; Reinisch 263. Guy Jennings is not identified in this report roster.", "sources": [["Court decision", "https://www.nycourts.gov/Reporter/3dseries/2019/2019_05504.htm"], ["Report references, p. 4", "https://www.collectiongruenbaum.com/wp-content/uploads/2017/12/280-Jonathan-Petropoulos-Rebuttal-Report.pdf"], ["2017 appeal · Stauber and ARIS", "https://www.nycourts.gov/Reporter/3dseries/2017/2017_02920.htm"], ["2021 appeal · Charron", "https://www.nycourts.gov/reporter/3dseries/2021/2021_06531.htm"]], "lawWitnesses": {"pryor": []}, "confirmedExperts": ["nicholas", "stein", "lillie", "reinisch"]}, "thyssen": {"short": "Thyssen", "laws": ["nixon", "sidley", "pedro"], "experts": ["jennings", "nicholas", "stein", "ernst", "tolsada", "buerba", "carrero", "perez"], "title": "Cassirer v. Thyssen-Bornemisza Collection Foundation", "text": "The 2019 judgment lists all eight TBC declaration witnesses (pp. 1–2). Only Carrero, Pérez de la Sota, Stein and Nicholas were cross-examined live, on December 4, 2018. Nixon Peabody appears as foundation counsel in the 2017 appellate opinion and the museum’s 2020 statement. Sidley is separately documented in the 2009 accounts; no Sidley-to-2018-witness link is drawn across those stages. Factual witnesses are distinguished from experts. The museum’s 2020 statement also names Pedro Alemán Abogados in Madrid; a witness-engagement connection for that firm has not been verified.", "sources": [["Foundation accounts · 2009", "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-15715"], ["2019 judgment", "https://www.lootedart.com/web_images/pdf2019/CassirerThyssen-JUDGMENT%2030.4.19.pdf"], ["Nixon Peabody · appellate counsel", "https://law.justia.com/cases/federal/appellate-courts/ca9/15-55550/15-55550-2017-07-10.html"], ["Museum statement · legal team", "https://www.museothyssen.org/sites/default/files/document/2020-08/Nota_sentencia_Pissarro_180820web_eng.pdf"]], "roles": {"carrero": "fact", "perez": "fact"}, "lawWitnesses": {"sidley": [], "pedro": []}, "confirmedExperts": ["jennings", "nicholas", "stein", "ernst"]}, "mfa": {"short": "MFA Boston", "laws": ["covington", "sherin"], "experts": ["reinisch", "reed"], "title": "Museum of Fine Arts, Boston v. Seger-Thomschitz", "text": "Kokoschka, Two Nudes (Lovers), 1973.196. Reinisch: retained legal expert. Reed: staff provenance declaration witness; formal retained-expert designation not established. Witness identification is based on the Harvard-hosted study; original declarations have not yet been inspected.", "sources": [["Counsel · appellate opinion", "https://caselaw.findlaw.com/court/us-1st-circuit/1541055.html"], ["Declaration references · pp. 77–81", "https://dash.harvard.edu/server/api/core/bitstreams/7312037d-d19d-6bd4-e053-0100007fdf3b/content"]], "roles": {"reed": "fact"}, "confirmedExperts": []}, "aic": {"short": "AIC", "laws": ["mcdermott"], "experts": ["stein"], "title": "Art Institute of Chicago · turnover proceeding, 2024", "text": "Schiele, Russian War Prisoner. The museum’s 2024 response identifies McDermott Will & Emery as counsel and repeatedly cites Laurie Stein’s report. This connection is specific to that filing; it does not map every stage of the litigation.", "sources": [["Museum’s response", "https://artlawpodcast.com/wp-content/uploads/2024/07/The-Art-Institute-of-Chicago-Response-Filing.pdf"]], "confirmedExperts": ["stein"]}, "toledo": {"short": "toledo", "title": "Toledo Museum of Art v. Ullin · 3:06-cv-07031 · 2006", "laws": ["nixon", "sidley", "vassar"], "experts": ["stein"], "text": "Laurie Stein conducted the museums’ joint provenance investigation. DIA director Graham Beal describes engaging Stauber and Stein and proceeding jointly with Toledo (2009 conference paper, printed pp. 804–805). This establishes a commissioned researcher, not verified oral expert testimony. Counsel are identified in the case opinion.", "sources": [["Counsel · opinion", "https://www.leagle.com/decision/20061279477fsupp2d80211191"], ["Research engagement · director’s account", "https://www.lootedart.com/web_images/pdf2018/Beal1.pdf"]], "roles": {"stein": "research"}, "confirmedExperts": []}, "dia": {"short": "dia", "title": "Detroit Institute of Arts v. Ullin · 06-10333 · 2007", "laws": ["nixon", "honigman"], "experts": ["stein"], "text": "Laurie Stein conducted the museums’ joint provenance investigation. DIA director Graham Beal describes engaging Stauber and Stein and proceeding jointly with Toledo (2009 conference paper, printed pp. 804–805). This establishes a commissioned researcher, not verified oral expert testimony. Counsel are identified in the case opinion.", "sources": [["Counsel · opinion", "https://www.obs-traffic.museum/sites/default/files/ressources/files/NYCLA_Returned_Holocaust.pdf"], ["Research engagement · director’s account", "https://www.lootedart.com/web_images/pdf2018/Beal1.pdf"]], "roles": {"stein": "research"}, "confirmedExperts": []}, "alsdorf": {"short": "alsdorf", "title": "Bennigson v. Alsdorf · S124828 / BC287294 · 2002–05", "laws": ["fagel", "sheppard"], "experts": [], "text": "California appellate service list identifies Chapman and Rownd (FagelHaber), and Towill and Vogel (Sheppard Mullin) for Alsdorf. No named expert witness for Alsdorf has yet been verified. This does not establish that none was retained.", "sources": [["Appellate brief · service list", "https://www.bslaw.net/ACB.pdf"], ["Settlement announcement", "https://www.bslaw.net/news/050809.html"]], "roles": {}, "confirmedExperts": []}, "tunkl": {"short": "tunkl", "title": "Bennigson v. Alsdorf · David Tunkl Fine Art · 2002–05", "laws": ["bernard"], "experts": [], "text": "The appellate service list identifies Stephen Bernard of Bernard & Bernard for defendant David Tunkl dba David Tunkl Fine Art. No opposing-side expert has yet been verified for this defendant.", "sources": [["Appellate brief · service list", "https://www.bslaw.net/ACB.pdf"]], "roles": {}, "confirmedExperts": []}, "searle": {"short": "searle", "title": "Goodman v. Searle · 96-cv-06459 · 1996–98", "laws": ["sidley"], "experts": ["hermine"], "text": "Northwestern University Archives identifies Howard J. Trienens and Ralph Lerner as members of Sidley & Austin’s legal team representing Daniel C. Searle in Goodman v. Searle (1996–1998), alongside Thomas Cauley, Susan Davies and Henry Mason. The same archive identifies Thaddeus Stauber of Eckhart, McSwain, Silliman & Sears as counsel for the Art Institute of Chicago, a distinct client. Hermine Chivain-Cobb was an art consultant to Sidley & Austin; the archive identifies her deposition. Consultant/deposition status is distinguished from a verified retained-expert designation.", "sources": [["Northwestern University Archives · Trienens biography and Searle/Degas case team", "https://findingaids.library.northwestern.edu/agents/people/2037"], ["Case archive · Northwestern", "https://findingaids.library.northwestern.edu/repositories/6/resources/739"], ["Geneva case note", "https://plone.unige.ch/art-adr/cases-affaires/landscape-with-smokestacks-2013-friedrich-gutmann-heirs-and-daniel-searle"]], "roles": {"hermine": "consultant"}, "confirmedExperts": []}, "met": {"short": "met", "title": "Zuckerman v. Metropolitan Museum of Art · 16-cv-07665 / 18-634", "laws": ["wilmer"], "experts": [], "text": "The 2019 appellate opinion identifies David Bowker and Michael Gottesman of Wilmer Cutler Pickering Hale and Dorr for the Met. No named museum-side expert has yet been verified in the reviewed sources. Dismissal-stage litigation must not be depicted as an expert trial.", "sources": [["Appellate opinion · counsel", "https://law.justia.com/cases/federal/appellate-courts/ca2/18-634/18-634-2019-06-26.html"]], "roles": {}, "confirmedExperts": []}, "moma": {"short": "moma", "title": "Schoeps v. Museum of Modern Art / Guggenheim · 07-cv-11074 · 2007–09", "laws": ["cleary", "joseph"], "experts": ["stein", "ernst"], "text": "The opinions identify Evan Davis (Cleary Gottlieb) and Gregory Joseph (Gregory P. Joseph Law Office) for both museums. The January 2009 opinion cites Stein’s provenance report and Ernst’s German-law report, and expressly calls Ernst the museums’ expert. These are written expert submissions; oral testimony is not established by these sources.", "sources": [["Expert reports · January opinion", "https://law.justia.com/cases/federal/district-courts/new-york/nysdce/1:2007cv11074/317641/119/"], ["Counsel · March opinion", "https://www.casemine.com/judgement/us/591467d4add7b049342b9bd7"]], "roles": {}, "confirmedExperts": ["stein", "ernst"]}, "guggenheim": {"short": "guggenheim", "title": "Schoeps v. Museum of Modern Art / Guggenheim · 07-cv-11074 · 2007–09", "laws": ["cleary", "joseph"], "experts": ["stein", "ernst"], "text": "The opinions identify Evan Davis (Cleary Gottlieb) and Gregory Joseph (Gregory P. Joseph Law Office) for both museums. The January 2009 opinion cites Stein’s provenance report and Ernst’s German-law report, and expressly calls Ernst the museums’ expert. These are written expert submissions; oral testimony is not established by these sources.", "sources": [["Expert reports · January opinion", "https://law.justia.com/cases/federal/district-courts/new-york/nysdce/1:2007cv11074/317641/119/"], ["Counsel · March opinion", "https://www.casemine.com/judgement/us/591467d4add7b049342b9bd7"]], "roles": {}, "confirmedExperts": ["stein", "ernst"]}, "momagrosz": {"short": "momagrosz", "title": "Grosz v. Museum of Modern Art · 09-cv-03706 · 2009–11", "laws": ["proskauer"], "experts": ["stein", "nicholas", "katzenbach"], "text": "The case opinions identify Proskauer Rose as MoMA’s counsel. The Art Newspaper reports a museum-commissioned report by Stein and Nicholas; scholarly citations identify Stein’s September 2009 corrected report, November rebuttal, and November 18 deposition. Katzenbach’s 2006 legal review preceded the lawsuit and is not classified here as expert testimony.", "sources": [["Counsel · trial opinion", "https://www.leagle.com/decision/inadvfdco110929000275"], ["Counsel · appeal", "https://www.leagle.com/decision/infco20101216110"], ["Museum-commissioned reports", "https://www.theartnewspaper.com/2009/11/01/new-evidence-in-grosz-nazi-loot-case-against-moma"], ["Stein report / deposition references · footnote 166", "https://www.lootedart.com/web_images/pdf/SSRN-id2042116.pdf"]], "roles": {"katzenbach": "review", "nicholas": "report", "stein": "expert"}, "lawWitnesses": {"proskauer": ["stein", "nicholas"]}, "confirmedExperts": []}, "houston": {"short": "houston", "title": "Emden v. Museum of Fine Arts, Houston · 21-cv-03348 / 23-20224", "laws": ["nixon", "munsch"], "experts": [], "text": "Nixon Peabody and Munsch Hardt defended the museum in the Emden litigation. The Supreme Court docket identifies Stauber for the museum. No named museum-side expert has yet been verified from the reviewed dismissal and appellate materials.", "sources": [["Museum counsel · Supreme Court docket", "https://www.supremecourt.gov/search.aspx?filename=/docket/docketfiles/html/public/24-341.html"], ["Co-counsel confirmation", "https://www.munsch.com/Newsroom/Blogs/170705/Nazi-Stolen-Painting-to-Remain-at-Museum-After-Federal-Court-Appeal"], ["Appeal · counsel names", "https://caselaw.findlaw.com/court/us-5th-circuit/116219798.html"]], "roles": {}, "confirmedExperts": []}, "fredjones": {"short": "fredjones", "title": "Meyer v. Board of Regents / OU Foundation · US and French proceedings", "laws": ["nixon", "debaecque"], "experts": [], "text": "Fred Jones Jr. Museum is shown with its University of Oklahoma institutional parties, not as a separately verified legal defendant. Stauber’s firm identifies representation of OU and the OU Foundation; Olivier de Baecque identifies his representation of the university in France. No named institutional-side expert has yet been verified.", "sources": [["US counsel · representation", "https://www.nixonpeabody.com/people/stauber-thaddeus-j"], ["French counsel · representation", "https://debaecque-avocats.com/spoliation-biens-culturels-pissaro/"]], "roles": {}, "confirmedExperts": []}, "aicsearle": {"short": "aicsearle", "title": "Goodman v. Searle · AIC involvement · 1996–98", "laws": ["eckhart"], "experts": [], "text": "Northwestern University Archives identifies the Art Institute of Chicago and its legal counsel Thaddeus Stauber of Eckhart, McSwain, Silliman & Sears among the participants in Goodman v. Searle. AIC was separately represented from Daniel C. Searle, whose lawyers were at Sidley & Austin. AIC acquired the disputed Degas through the settlement. The grey dotted line denotes AIC’s involvement in the Searle dispute, without suggesting shared counsel.", "sources": [["Northwestern University Archives · case participants", "https://findingaids.library.northwestern.edu/agents/people/2037"]], "roles": {}, "confirmedExperts": []}, "csepel": {"short": "de Csepel", "title": "de Csepel v. Republic of Hungary · 1:10-cv-01261", "laws": ["nixon"], "experts": [], "text": "Nixon Peabody represented the Republic of Hungary and Hungarian institutional defendants, including the Hungarian National Gallery, Museum of Fine Arts, Museum of Applied Arts, and Budapest University of Technology and Economics. Documented counsel include Thaddeus J. Stauber, Sarah Erickson André, D. Grayson Yeargin, and later Aaron M. Brian. The dispute concerns the Herzog collection. No defense-side expert is assigned without separate documentary verification.", "sources": [["2014 motion · counsel and institutional defendants", "https://hungarylootedart.com/wp-content/uploads/2015-14-14DefendantsMotionDismiss.pdf"], ["2024 court opinion · counsel", "https://www.leagle.com/decision/infdco20241002h78"], ["2026 appellate opinion · counsel", "https://law.counselstack.com/opinion/david-de-csepel-v-republic-of-hungary-cadc-2026"]], "confirmedExperts": []}, "berg": {"short": "Berg", "title": "Berg v. Kingdom of the Netherlands · 20-1765 (4th Cir. 2022)", "laws": ["nixon"], "experts": [], "text": "Nixon Peabody attorneys Thaddeus J. Stauber and Kristin M. Jamberdino represented twenty Dutch museum defendants; Sarah Erickson André also appeared for appellees. The Kingdom of the Netherlands and its government agencies were separately represented by Baker & Miller PLLC; Womble Bond Dickinson also appeared for appellees. This node groups the twenty museums for readability and does not imply Nixon Peabody represented the Kingdom itself. The dispute concerns works formerly held by the Katz art-dealing family.", "sources": [["Fourth Circuit opinion · full counsel roster", "https://law.justia.com/cases/federal/appellate-courts/ca4/20-1765/20-1765-2022-02-03.html"]], "confirmedExperts": []}}, "holderOrder": ["lehman", "nagy", "thyssen", "toledo", "dia", "mfa", "aic", "searle", "moma", "guggenheim", "momagrosz", "met", "houston", "fredjones", "alsdorf", "tunkl", "csepel", "berg"], "firmOrder": ["nixon", "pryor", "sidley", "eckhart", "covington", "sherin", "mcdermott", "honigman", "vassar", "cleary", "joseph", "proskauer", "wilmer", "munsch", "debaecque", "fagel", "sheppard", "bernard", "pedro"], "expertOrder": ["jennings", "nicholas", "stein", "lillie", "reinisch", "ernst", "tolsada", "buerba", "hermine", "reed", "carrero", "perez", "katzenbach"]};
+const {nodes,cases,holderOrder,firmOrder,expertOrder}=DATA;
+const insurerOrder=["aris"];
+const palette=firmOrder.map((_,i)=>i<6?('var(--viz-series-'+(i+1)+')'):'light-dark(hsl('+((i*137.508)%360).toFixed(1)+' 55% 37%),hsl('+((i*137.508)%360).toFixed(1)+' 65% 70%))');
+const colors=Object.fromEntries(firmOrder.map((f,i)=>[f,palette[i]]));
+const roleNames={expert:'Expert submission; oral testimony varies by case',report:'Commissioned expert report',research:'Commissioned researcher',consultant:'Consultant · deposition',fact:'Factual / staff witness',review:'Pre-litigation legal reviewer'};
+let focus={type:'firm',id:'nixon'};
+const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+const role=(c,w)=>(c.roles||{})[w]||'expert';
+const witnessesFor=(c,f)=>(c.lawWitnesses&&Object.hasOwn(c.lawWitnesses,f))?c.lawWitnesses[f]:c.experts;
+const dashed=r=>['research','consultant','review'].includes(r);
+function selectedCases(){return Object.entries(cases).filter(([id,c])=>focus.type==='all'||(focus.type==='firm'?c.laws.includes(focus.id):focus.type==='holder'?(id===focus.id||(focus.id==='aic'&&id==='aicsearle')||(focus.id==='searle'&&id==='aicsearle')):focus.type==='insurer'?c.insurer===focus.id:c.experts.includes(focus.id)));}
+function entity(id,kind,description,confirmed=false){
+ const el=document.createElement('button');el.type='button';el.className='entity cursor-interaction '+kind;el.dataset.node=id;
+ el.innerHTML='<span class="name">'+esc(nodes[id][0])+(confirmed?'*':'')+'</span><span class="meta text-small">'+esc(description||nodes[id][1])+'</span>';
+ if(kind==='insurer'){el.style.borderColor='#9871be';el.style.background='color-mix(in srgb,#9871be 12%,var(--background))';}
+ if(kind==='law')el.style.setProperty('--firm',colors[id]);
+ el.addEventListener('click',()=>{focus={type:kind==='law'?'firm':kind==='holder'?'holder':kind==='insurer'?'insurer':'witness',id};update();});
+ return el;
+}
+function draw(edges){
+ const map=root.querySelector('.network'),svg=map.querySelector('svg'),r=map.getBoundingClientRect();svg.innerHTML='';svg.setAttribute('viewBox','0 0 '+r.width+' '+r.height);
+ for(const edge of edges){
+  const an=root.querySelector('[data-node="'+edge.from+'"]'),bn=root.querySelector('[data-node="'+edge.to+'"]');if(!an||!bn)continue;
+  const a=an.getBoundingClientRect(),b=bn.getBoundingClientRect();
+  let x=a.right-r.left,y=a.top+a.height/2-r.top,X=b.left-r.left,Y=b.top+b.height/2-r.top;
+  if(edge.institutional){x=a.left+a.width/2-r.left;y=a.bottom-r.top;X=b.left+b.width/2-r.left;Y=b.top-r.top;}
+  const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+  p.setAttribute('d',edge.institutional ? 'M '+x+' '+y+' C '+(x-35)+' '+(y+(Y-y)*.3)+', '+(X-35)+' '+(Y-(Y-y)*.3)+', '+X+' '+Y : 'M '+x+' '+y+' C '+(x+(X-x)*.5)+' '+y+', '+(X-(X-x)*.5)+' '+Y+', '+X+' '+Y);
+  p.style.stroke=edge.insurance?'#9871be':edge.institutional?'#777777':edge.firm?colors[edge.firm]:'var(--foreground)';if(edge.insurance)p.setAttribute('stroke-dasharray','3 5');if(edge.dash)p.setAttribute('stroke-dasharray',edge.institutional?'3 6':'7 6');
+  svg.appendChild(p);
+ }
+}
+let currentEdges=[];
+function update(){
+ const chosen=selectedCases(),hs=new Set(chosen.map(([id])=>id==='aicsearle'?'aic':id)),fs=new Set(),ws=new Set(),ins=new Set(),edges=[];
+ if(hs.has('searle')||chosen.some(([id])=>id==='aicsearle')){hs.add('aic');hs.add('searle');edges.push({from:'aic',to:'searle',institutional:true,dash:true});}
+ const unique=new Map();
+ for(const [id,c]of chosen){
+  const holderId=id==='aicsearle'?'aic':id;
+  if(c.insurer){ins.add(c.insurer);edges.push({from:c.insurer,to:id,firm:null,insurance:true});}
+  for(const f of c.laws){
+   if(focus.type==='firm'&&f!==focus.id)continue;
+   if(focus.type==='witness'&&!witnessesFor(c,f).includes(focus.id))continue;
+   fs.add(f);edges.push({from:holderId,to:f,firm:f});
+   for(const w of witnessesFor(c,f)){
+    if(focus.type==='witness'&&w!==focus.id)continue;
+    ws.add(w);const key=f+'|'+w,old=unique.get(key),dash=dashed(role(c,w));
+    if(old)old.dash=old.dash&&dash;else unique.set(key,{from:f,to:w,firm:f,dash});
+   }
+  }
+  if((focus.type==='all'||focus.type==='holder'||(focus.type==='witness'&&focus.id==='katzenbach'))&&c.experts.includes('katzenbach')){
+   ws.add('katzenbach');edges.push({from:id,to:'katzenbach',dash:true});
+  }
+ }
+ edges.push(...unique.values());currentEdges=edges;
+ const lanes=[['insurer-lane',insurerOrder.filter(x=>ins.has(x)),'insurer'],['owner-lane',holderOrder.filter(x=>hs.has(x)),'holder'],['firm-lane',firmOrder.filter(x=>fs.has(x)),'law'],['witness-lane',expertOrder.filter(x=>ws.has(x)),'witness']];
+ for(const [lid,ids,kind]of lanes){const lane=root.querySelector('#'+lid);lane.replaceChildren();
+  for(const id of ids){let description;
+   if(kind==='witness'){const roles=[...new Set(chosen.filter(([,c])=>c.experts.includes(id)).map(([,c])=>roleNames[role(c,id)]))];description=nodes[id][1]+' · '+roles.join(' / ');}
+   const confirmed=kind==='witness'&&chosen.some(([,c])=>(c.confirmedExperts||[]).includes(id));
+   lane.appendChild(entity(id,kind,description,confirmed));
+  }
+  if(!ids.length){const e=document.createElement('div');e.className='empty text-small';e.textContent='No verified connection in this category';lane.appendChild(e);}
+ }
+ const count=Math.max(...lanes.map(x=>x[1].length),3),height=count*(innerWidth<540?155:116);
+ root.querySelector('.network').style.minHeight=height+'px';
+ root.querySelectorAll('#firm-pickers button').forEach(b=>b.setAttribute('aria-pressed',String(focus.type==='all'?b.dataset.firm==='all':focus.type==='firm'&&b.dataset.firm===focus.id)));
+ const unknown=chosen.filter(([,c])=>!c.experts.length).length;
+ root.querySelector('#selection-status').textContent=(focus.type==='all'?'All documented connections':nodes[focus.id][0])+' · '+new Set(chosen.map(([,c])=>c.title)).size+' disputes · '+chosen.length+' holder/case entries'+(unknown?' · '+unknown+' with witness information unresolved':'');
+ root.querySelector('#case-evidence').innerHTML=chosen.map(([id,c])=>'<details'+(chosen.length===1?' open':'')+'><summary>'+esc(nodes[id==='aicsearle'?'aic':id][0])+' · '+esc(c.title)+'</summary><div class="case-note">'+esc(c.text)+'</div><div class="text-small">'+(c.experts.length?c.experts.map(w=>esc(nodes[w][0])+((c.confirmedExperts||[]).includes(w)?'*':'')+' — '+esc(roleNames[role(c,w)])).join('<br>'):'Witness name not yet verified.')+'</div>'+c.sources.map(([label,url])=>'<a class="source text-small" target="_blank" rel="noopener noreferrer" href="'+esc(url)+'">'+esc(label)+' ↗<br>'+esc(url)+'</a>').join('')+'</details>').join('');
+ requestAnimationFrame(()=>draw(currentEdges));
+}
+const controls=root.querySelector('#firm-pickers');
+for(const id of ['all',...firmOrder]){
+ const b=document.createElement('button');b.type='button';b.className='btn';b.dataset.firm=id;
+ if(id!=='all'){const dot=document.createElement('span');dot.className='dot';dot.style.background=colors[id];dot.setAttribute('aria-hidden','true');b.appendChild(dot);}
+ b.appendChild(document.createTextNode(id==='all'?'All firms':nodes[id][0]));
+ b.addEventListener('click',()=>{focus=id==='all'?{type:'all',id:null}:{type:'firm',id};update();});controls.appendChild(b);
+}
+new ResizeObserver(()=>draw(currentEdges)).observe(root.querySelector('.network'));update();
+})();
+</script>
+</div>
+</body></html>
